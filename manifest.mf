@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+X-COMMENT: Main-Class will be added automatically by build
+Main-Class: BagAwareApp.class
+Class-Path: lib/rs2xml.jar lib/com.mysql.jdbc_5.1.5.jar
+SplashScreen-Image: bagawareapp/logo.png
