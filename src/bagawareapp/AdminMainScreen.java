@@ -287,7 +287,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
         //close current window
         this.dispose();
         //reopen the loginscreen
-        LogonScreen login = new LogonScreen();
+        final LogonScreen login = new LogonScreen();
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the login screen to the foreground and centere it
@@ -302,7 +302,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
 
     private void newuserbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newuserbuttonActionPerformed
         //Open the window to create a new user
-        AdminPopupCreate aCreate = new AdminPopupCreate();
+        final AdminPopupCreate aCreate = new AdminPopupCreate();
         aCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
@@ -342,7 +342,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
 
     private void button_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_refreshActionPerformed
         //refreshes the screen and table contents
-        AdminMainScreen AMain = new AdminMainScreen();
+        final AdminMainScreen AMain = new AdminMainScreen();
         AMain.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
