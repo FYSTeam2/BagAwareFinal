@@ -13,10 +13,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author Omer
+ */
 public class JavaConnect {
     
     private Connection conn;
     
+    /**
+     *
+     * @return
+     */
     public Connection ConnecrDb() {
         try {
             Driver myDriver = new com.mysql.jdbc.Driver();
@@ -34,6 +42,9 @@ public class JavaConnect {
 
     }
     
+    /**
+     *
+     */
     public void closeDb() {
         try {
             conn.close();

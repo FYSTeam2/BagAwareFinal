@@ -137,7 +137,7 @@ public class BagAwareApp extends javax.swing.JFrame {
                 }
 
                 new BagAwareApp().setVisible(true);
-
+                
             }
 
         });//einde timer

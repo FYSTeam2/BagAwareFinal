@@ -20,10 +20,18 @@ public class QueryManager {
     ResultSet rs = null;
     PreparedStatement pst = null;
     
+    /**
+     *
+     * @param jc
+     */
     public QueryManager(JavaConnect jc) {
         this.jc = jc;
     }
     
+    /**
+     *
+     * @param luggage
+     */
     public void addLuggage(Luggage luggage) {
         
         jc.ConnecrDb();

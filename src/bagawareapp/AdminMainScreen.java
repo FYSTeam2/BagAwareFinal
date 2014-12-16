@@ -15,8 +15,15 @@ import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
+/**
+ *
+ * @author Omer
+ */
 public class AdminMainScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public static String usernameSelected = null;
     //variables below server for db connection and querries
     //moet private
@@ -306,6 +313,11 @@ public class AdminMainScreen extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_newuserbuttonActionPerformed
+
+    /**
+     *
+     * @param evt
+     */
     public void Table_CasesMouseClicked(java.awt.event.MouseEvent evt) {
 
         try {
