@@ -23,7 +23,7 @@ public class JavaConnect {
             DriverManager.registerDriver(myDriver);
             String URL = "jdbc:mysql://localhost:3306/bagawaredb";
             String USER = "root";
-            String PASS = "root";
+            String PASS = "";
             conn = DriverManager.getConnection(URL, USER, PASS);
 
             return conn;
