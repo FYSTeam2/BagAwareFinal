@@ -12,18 +12,35 @@ import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.*;
 
+/**
+ * This is the logonscreen class
+ *
+ * @author Omer
+ */
 public class LogonScreen extends javax.swing.JFrame {
 //Prepare variables for future use (or in later screens)
 
+    /**
+     *
+     */
     public static String locationOfLogin = null;
+
+    /**
+     *
+     */
     public static String usernameOfLogin = null;
+
+    /**
+     *
+     */
     public static String typeOfLogin = null;
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
     JavaConnect JavaConnect = new JavaConnect();
+
     LogonScreen() {
-        initComponents();        
+        initComponents();
         conn = JavaConnect.ConnecrDb();
         //add locations to the combobox via method
         FillLocationBox();
@@ -255,11 +272,11 @@ public class LogonScreen extends javax.swing.JFrame {
             loginMethod();
         }
     }//GEN-LAST:event_combobox_locationKeyPressed
-    //method to add locations into the combobox on the login screen
 
+    //method to add locations into the combobox on the login screen
     private void FillLocationBox() {
         try {
-            
+
             conn = JavaConnect.ConnecrDb();
             String sqlLocation = "SELECT * FROM bagawaredb.LOCATION";
             pst = conn.prepareStatement(sqlLocation);
@@ -270,8 +287,8 @@ public class LogonScreen extends javax.swing.JFrame {
                 combobox_location.addItem(location);
 
             }
-        JavaConnect.closeDb();
-            
+            JavaConnect.closeDb();
+
         } catch (Exception e) {
 
             JOptionPane.showMessageDialog(null, "Connection to database failed,"
@@ -320,7 +337,7 @@ public class LogonScreen extends javax.swing.JFrame {
     // The method that logs in the user, this method is used by the "login"
     // button in the login screen and the <enter> key also triggers this method
     private void loginMethod() {
-        
+
         conn = JavaConnect.ConnecrDb();
         // login button logic is here
         String sqllogin = "select * from bagawaredb.ACCOUNT where username=?"
@@ -358,7 +375,8 @@ public class LogonScreen extends javax.swing.JFrame {
                     //close the login screen
                     this.dispose();
                     //open the admin main screen
-                    AdminMainScreen aMain = new AdminMainScreen();
+                    final AdminMainScreen aMain = new AdminMainScreen();
+                    aMain.setTitle("Administrator Main Screen");    // set title
                     aMain.setVisible(true);
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         // these lines force the screen to the foreground
@@ -376,7 +394,8 @@ public class LogonScreen extends javax.swing.JFrame {
                     //close the login screen
                     this.dispose();
                     //open the employee main screen
-                    EmployeeMainScreen eMain = new EmployeeMainScreen();
+                    final EmployeeMainScreen eMain = new EmployeeMainScreen();
+                    eMain.setTitle("Employee Main Screen");         // set title
                     eMain.setVisible(true);
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         // these lines force the screen to the foreground 
@@ -394,7 +413,8 @@ public class LogonScreen extends javax.swing.JFrame {
                     //close the login screen
                     this.dispose();
                     //open the manager main screen
-                    ManagerMainScreen mMain = new ManagerMainScreen();
+                    final ManagerMainScreen mMain = new ManagerMainScreen();
+                    mMain.setTitle("Manager Main Screen");
                     mMain.setVisible(true);
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         // these lines force the screen to the foreground 
@@ -423,7 +443,7 @@ public class LogonScreen extends javax.swing.JFrame {
                     + " failed");
         }
         //----------------------------------------
-        
+
         JavaConnect.closeDb();
     }
 

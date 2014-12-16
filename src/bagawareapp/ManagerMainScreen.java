@@ -15,13 +15,24 @@ import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
+/**
+ *
+ * @author Omer
+ */
 public class ManagerMainScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public static String labelCodeSelected = null;
     Connection conn = null;
     ResultSet rs1 = null;
     ResultSet rs2 = null;
     PreparedStatement pst = null;
+
+    /**
+     *
+     */
     public static ResultSet rsmatch = null;
     ResultSet rs = null;
 
@@ -287,7 +298,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         //close current window
         this.dispose();
         //reopen the loginscreen
-        LogonScreen login = new LogonScreen();
+        final LogonScreen login = new LogonScreen();
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the login screen to the foreground and centere it
@@ -332,7 +343,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         }
     }
     private void button_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_deleteActionPerformed
-        CasePopupDelete CDelete = new CasePopupDelete();
+        final CasePopupDelete CDelete = new CasePopupDelete();
         CDelete.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
