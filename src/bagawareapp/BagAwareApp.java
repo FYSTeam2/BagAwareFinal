@@ -39,6 +39,9 @@ public class BagAwareApp extends javax.swing.JFrame {
     //open the loginscreen from bagawareapp.LogonScreen.java                         
     private void initComponents() {
         LogonScreen login = new LogonScreen();
+
+        login.setTitle("my new title");
+        
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the login screen to the foreground and centere it
