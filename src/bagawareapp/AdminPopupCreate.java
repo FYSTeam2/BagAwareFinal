@@ -14,6 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.*;
 
+/**
+ *
+ * @author Omer
+ */
 public class AdminPopupCreate extends javax.swing.JFrame {
     
     Connection conn = null;
@@ -307,6 +311,10 @@ public class AdminPopupCreate extends javax.swing.JFrame {
     }
     private static final String DATE_FORMAT_NOW = "yyyy-MM-dd";
 
+    /**
+     *
+     * @return
+     */
     public static String now() {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);

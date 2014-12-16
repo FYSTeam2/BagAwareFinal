@@ -15,13 +15,24 @@ import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
+/**
+ *
+ * @author Omer
+ */
 public class ManagerMainScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public static String labelCodeSelected = null;
     Connection conn = null;
     ResultSet rs1 = null;
     ResultSet rs2 = null;
     PreparedStatement pst = null;
+
+    /**
+     *
+     */
     public static ResultSet rsmatch = null;
     ResultSet rs = null;
 
