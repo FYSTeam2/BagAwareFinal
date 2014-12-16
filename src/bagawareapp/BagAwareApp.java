@@ -136,7 +136,9 @@ public class BagAwareApp extends javax.swing.JFrame {
                     System.out.println(ex.toString());
                 }
 
-                new BagAwareApp().setVisible(true);
+                BagAwareApp bagApp = new BagAwareApp();
+                bagApp.setTitle("BagAware");
+                bagApp.setVisible(true);
 
             }
 
