@@ -358,7 +358,7 @@ public class LogonScreen extends javax.swing.JFrame {
                     //close the login screen
                     this.dispose();
                     //open the admin main screen
-                    AdminMainScreen aMain = new AdminMainScreen();
+                    final AdminMainScreen aMain = new AdminMainScreen();
                     aMain.setTitle("Administrator Main Screen");    // set title
                     aMain.setVisible(true);
                     java.awt.EventQueue.invokeLater(new Runnable() {
@@ -377,7 +377,7 @@ public class LogonScreen extends javax.swing.JFrame {
                     //close the login screen
                     this.dispose();
                     //open the employee main screen
-                    EmployeeMainScreen eMain = new EmployeeMainScreen();
+                    final EmployeeMainScreen eMain = new EmployeeMainScreen();
                     eMain.setTitle("Employee Main Screen");         // set title
                     eMain.setVisible(true);
                     java.awt.EventQueue.invokeLater(new Runnable() {
@@ -396,7 +396,7 @@ public class LogonScreen extends javax.swing.JFrame {
                     //close the login screen
                     this.dispose();
                     //open the manager main screen
-                    ManagerMainScreen mMain = new ManagerMainScreen();
+                    final ManagerMainScreen mMain = new ManagerMainScreen();
                     mMain.setTitle("Manager Main Screen");
                     mMain.setVisible(true);
                     java.awt.EventQueue.invokeLater(new Runnable() {

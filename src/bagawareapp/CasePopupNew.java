@@ -83,7 +83,7 @@ public class CasePopupNew extends javax.swing.JFrame {
         //close choice menu
         this.dispose();
         //open create new case window
-        CasePopupNewBagage cCreate = new CasePopupNewBagage();
+        final CasePopupNewBagage cCreate = new CasePopupNewBagage();
         cCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
@@ -101,7 +101,7 @@ public class CasePopupNew extends javax.swing.JFrame {
         //close choice menu
         this.dispose();
         //open create new case window
-        CasePopupNewClient cCreate = new CasePopupNewClient();
+        final CasePopupNewClient cCreate = new CasePopupNewClient();
         cCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
