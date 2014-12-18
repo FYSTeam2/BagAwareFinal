@@ -15,48 +15,40 @@ import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
-/**
- *
- * @author Omer
- */
 public class ManagerMainScreen extends javax.swing.JFrame {
 
-    /**
-     *
-     */
     public static String labelCodeSelected = null;
     Connection conn = null;
     ResultSet rs1 = null;
     ResultSet rs2 = null;
     PreparedStatement pst = null;
-
-    /**
-     *
-     */
     public static ResultSet rsmatch = null;
     ResultSet rs = null;
-
+    private JavaConnect jc;
+    
     /**
      * Creates new form ManagerPopupScreen
      */
     ManagerMainScreen() {
         initComponents();
-        JavaConnect JavaConnect = new JavaConnect();
-        conn = JavaConnect.ConnecrDb();
+        jc = new JavaConnect();
         Update_Table();
-        JavaConnect.closeDb();
+
+
     }
 
-    private void Update_Table() {
+      private void Update_Table() {
         try {
-            String sql = "SELECT (baglabelcode, Status, Datecreated) FROM"
+            conn = jc.ConnecrDb();
+            String sql = "SELECT baglabelcode, Status, Datecreated FROM"
                     + " bagawaredb.FOUND";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             tableCases.setModel(DbUtils.resultSetToTableModel(rs));
-
-        } catch (Exception e) {
+            jc.closeDb();
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -298,7 +290,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         //close current window
         this.dispose();
         //reopen the loginscreen
-        final LogonScreen login = new LogonScreen();
+        LogonScreen login = new LogonScreen();
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the login screen to the foreground and centere it
@@ -343,7 +335,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         }
     }
     private void button_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_deleteActionPerformed
-        final CasePopupDelete CDelete = new CasePopupDelete();
+        CasePopupDelete CDelete = new CasePopupDelete();
         CDelete.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it

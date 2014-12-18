@@ -15,24 +15,13 @@ import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
-/**
- *
- * @author Omer
- */
 public class EmployeeMainScreen extends javax.swing.JFrame {
 
-    /**
-     *
-     */
     public static String labelCodeSelected = null;
     Connection conn = null;
     ResultSet rs1 = null;
     ResultSet rs2 = null;
     PreparedStatement pst = null;
-
-    /**
-     *
-     */
     public static ResultSet rsmatch = null;
     ResultSet rs = null;
     JavaConnect JavaConnect = new JavaConnect();
@@ -285,7 +274,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
         //close current window
         this.dispose();
         //reopen the loginscreen
-        final LogonScreen login = new LogonScreen();
+        LogonScreen login = new LogonScreen();
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the login screen to the foreground and centere it
@@ -299,7 +288,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
 
     private void button_newcaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_newcaseActionPerformed
         //Open the window to create a new case
-        final CasePopupNew cCreate = new CasePopupNew();
+        CasePopupNew cCreate = new CasePopupNew();
         cCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
@@ -336,7 +325,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_tableCasesMouseClicked
 
     private void button_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_deleteActionPerformed
-        final CasePopupDelete cDelete = new CasePopupDelete();
+        CasePopupDelete cDelete = new CasePopupDelete();
         cDelete.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it

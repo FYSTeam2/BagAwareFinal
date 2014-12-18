@@ -38,8 +38,7 @@ public class BagAwareApp extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     //open the loginscreen from bagawareapp.LogonScreen.java                         
     private void initComponents() {
-        final LogonScreen login = new LogonScreen();
-        login.setTitle("Login screen");     // title at the titlebar
+        LogonScreen login = new LogonScreen();
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the login screen to the foreground and centere it
@@ -137,10 +136,6 @@ public class BagAwareApp extends javax.swing.JFrame {
                 }
 
                 new BagAwareApp().setVisible(true);
-                BagAwareApp bagApp = new BagAwareApp();
-                bagApp.setTitle("BagAware");    // title of the red background
-                bagApp.setVisible(true);
-
 
             }
 

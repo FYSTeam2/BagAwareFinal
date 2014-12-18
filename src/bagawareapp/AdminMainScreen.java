@@ -15,15 +15,8 @@ import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
-/**
- *
- * @author Omer
- */
 public class AdminMainScreen extends javax.swing.JFrame {
 
-    /**
-     *
-     */
     public static String usernameSelected = null;
     //variables below server for db connection and querries
     //moet private
@@ -287,7 +280,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
         //close current window
         this.dispose();
         //reopen the loginscreen
-        final LogonScreen login = new LogonScreen();
+        LogonScreen login = new LogonScreen();
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the login screen to the foreground and centere it
@@ -302,7 +295,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
 
     private void newuserbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newuserbuttonActionPerformed
         //Open the window to create a new user
-        final AdminPopupCreate aCreate = new AdminPopupCreate();
+        AdminPopupCreate aCreate = new AdminPopupCreate();
         aCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
@@ -313,11 +306,6 @@ public class AdminMainScreen extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_newuserbuttonActionPerformed
-
-    /**
-     *
-     * @param evt
-     */
     public void Table_CasesMouseClicked(java.awt.event.MouseEvent evt) {
 
         try {
@@ -342,7 +330,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
 
     private void button_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_refreshActionPerformed
         //refreshes the screen and table contents
-        final AdminMainScreen AMain = new AdminMainScreen();
+        AdminMainScreen AMain = new AdminMainScreen();
         AMain.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it

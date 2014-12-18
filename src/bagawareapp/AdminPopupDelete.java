@@ -12,10 +12,6 @@ import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
-/**
- *
- * @author Omer
- */
 public class AdminPopupDelete extends javax.swing.JFrame {
 
     Connection conn = null;
