@@ -41,9 +41,10 @@ public class AdminMainScreen extends javax.swing.JFrame {
     private void updateTable() {
         try {
             //Connection openen gebeurt hier.
-             conn = JavaConnect.ConnecrDb();
-            String sql = "SELECT username, Type_typecode, accountcreatedate FROM"
-                    + " bagawaredb.ACCOUNT";
+            conn = JavaConnect.ConnecrDb();
+            String sql = "SELECT username AS 'Username', Type_typecode AS "
+                    + "'User Type', accountcreatedate AS 'Date Created' "
+                    + "FROM bagawaredb.ACCOUNT";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             tableAccounts.setModel(DbUtils.resultSetToTableModel(rs));

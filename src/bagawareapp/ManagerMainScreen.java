@@ -40,8 +40,9 @@ public class ManagerMainScreen extends javax.swing.JFrame {
       private void Update_Table() {
         try {
             conn = jc.ConnecrDb();
-            String sql = "SELECT baglabelcode, Status, Datecreated FROM"
-                    + " bagawaredb.FOUND";
+            String sql = "SELECT baglabelcode 'Bagage Label', Status, "
+                    + "Datecreated 'Created On' "
+                    + "FROM bagawaredb.FOUND";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             tableCases.setModel(DbUtils.resultSetToTableModel(rs));

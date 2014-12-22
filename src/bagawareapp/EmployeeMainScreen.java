@@ -38,8 +38,9 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
     private void Update_Table() {
         try {
             conn = JavaConnect.ConnecrDb();
-            String sql = "SELECT baglabelcode AS Bagage_label, Status, Datecreated FROM"
-                    + " bagawaredb.FOUND";
+            String sql = "SELECT baglabelcode AS 'Bagage Label', Status, "
+                    + "Datecreated AS 'Created On'"
+                    + "FROM bagawaredb.FOUND";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             tableCases.setModel(DbUtils.resultSetToTableModel(rs));
