@@ -275,9 +275,10 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
         this.dispose();
         //reopen the loginscreen
         LogonScreen login = new LogonScreen();
+        login.setTitle("Test title");      // test title (loginscreen) at logout
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
-            // these lines force the login screen to the foreground and centere it
+            // these lines force the login screen to the foreground and center it
             public void run() {
                 login.toFront();
                 login.repaint();
