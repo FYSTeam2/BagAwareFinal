@@ -38,7 +38,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
     private void Update_Table() {
         try {
             conn = JavaConnect.ConnecrDb();
-            String sql = "SELECT baglabelcode, Status, Datecreated FROM"
+            String sql = "SELECT baglabelcode AS Bagage_label, Status, Datecreated FROM"
                     + " bagawaredb.FOUND";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -52,7 +52,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
     private void TableSearch() {
         try {
             conn = JavaConnect.ConnecrDb();
-            String sql = "select * from bagawaredb.FOUND where (baglabelcode=?"
+            String sql = "SELECT * FROM bagawaredb.FOUND WHERE (baglabelcode=?"
                     + " OR brand=? OR color=? OR weight=?)";
             pst = conn.prepareStatement(sql);
             pst.setString(1, txt_search.getText());
@@ -306,7 +306,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
             conn = JavaConnect.ConnecrDb();
             int row = tableCases.getSelectedRow();
             String tableClick = (String) (tableCases.getModel().getValueAt(row, 0));
-            String sql = "SELECT * FROM bagawaredb.FOUND where baglabelcode='"
+            String sql = "SELECT * FROM bagawaredb.FOUND WHERE baglabelcode='"
                     + tableClick + "' ";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -345,7 +345,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
         try {
             conn = JavaConnect.ConnecrDb();
 
-            String sql1 = "SELECT baglabelcode FROM bagawaredb.LOST";
+            String sql1 = "SELECT baglabelcode  FROM bagawaredb.LOST";
             String sql2 = "SELECT baglabelcode FROM bagawaredb.FOUND";
 
             pst = conn.prepareStatement(sql1);
