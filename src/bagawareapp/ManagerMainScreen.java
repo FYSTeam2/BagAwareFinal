@@ -303,7 +303,16 @@ public class ManagerMainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_button_logoutActionPerformed
 
     private void button_StatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_StatisticsActionPerformed
-        // TODO add your handling code here:
+    Grafiek cCreate = new Grafiek();    
+      cCreate.setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            // these lines force the screen to the foreground and centere it
+            public void run() {
+                cCreate.toFront();
+                cCreate.repaint();
+                cCreate.setLocationRelativeTo(null);
+            }
+        });
     }//GEN-LAST:event_button_StatisticsActionPerformed
 
     private void button_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_searchActionPerformed
