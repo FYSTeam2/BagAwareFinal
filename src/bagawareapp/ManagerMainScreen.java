@@ -45,7 +45,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             tableCases.setModel(DbUtils.resultSetToTableModel(rs));
-            jc.closeDb();
+            // jc.closeDb();   // DB CLOSED TOO SOON
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
             System.out.println(e.getMessage());
@@ -87,6 +87,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        button_refresh = new javax.swing.JButton();
         button_Statistics = new javax.swing.JButton();
         button_search = new javax.swing.JButton();
         txt_search = new javax.swing.JTextField();
@@ -133,6 +134,13 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(240, 240, 240));
         jLabel9.setText("Location:");
 
+        button_refresh.setText("Refresh");
+        button_refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_refreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -143,6 +151,8 @@ public class ManagerMainScreen extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button_refresh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(button_logout))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(108, 108, 108)
@@ -165,7 +175,9 @@ public class ManagerMainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(button_logout)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(button_logout)
+                            .addComponent(button_refresh))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
@@ -410,6 +422,22 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_findmatchActionPerformed
 
+    private void button_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_refreshActionPerformed
+        //refreshes the screen and table contents
+        ManagerMainScreen MMain = new ManagerMainScreen();
+        MMain.setTitle("Manager Main Screen");        // set title
+        MMain.setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            // these lines force the screen to the foreground and centere it
+            public void run() {
+                MMain.toFront();
+                MMain.repaint();
+                MMain.setLocationRelativeTo(null);
+            }
+        });
+        this.dispose();
+    }//GEN-LAST:event_button_refreshActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -451,6 +479,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
     private javax.swing.JButton button_delete;
     private javax.swing.JButton button_findmatch;
     private javax.swing.JButton button_logout;
+    private javax.swing.JButton button_refresh;
     private javax.swing.JButton button_search;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;

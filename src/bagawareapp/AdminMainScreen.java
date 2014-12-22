@@ -331,6 +331,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
     private void button_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_refreshActionPerformed
         //refreshes the screen and table contents
         AdminMainScreen AMain = new AdminMainScreen();
+        AMain.setTitle("Administrator Main Screen");        // set title
         AMain.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it

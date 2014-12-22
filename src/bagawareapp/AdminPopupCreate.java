@@ -239,7 +239,7 @@ public class AdminPopupCreate extends javax.swing.JFrame {
             pst.executeUpdate();
 
             //close create window and refresh table
-            //JavaConnect.closeDb(); //close DB connection    // gives an error
+            //JavaConnect.closeDb(); //closes DB connection   // gives an error
             this.dispose();
 
         } catch (Exception e) {
