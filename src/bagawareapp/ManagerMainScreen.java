@@ -45,8 +45,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
                     + "FROM bagawaredb.FOUND";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
-            tableCases.setModel(DbUtils.resultSetToTableModel(rs));
-            // jc.closeDb();   // DB CLOSED TOO SOON
+            tableCases.setModel(DbUtils.resultSetToTableMod
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
             System.out.println(e.getMessage());
