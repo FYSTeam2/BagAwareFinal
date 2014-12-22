@@ -32,7 +32,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
         initComponents();
         conn = JavaConnect.ConnecrDb();
         Update_Table();
-        JavaConnect.closeDb();
+        // JavaConnect.closeDb();   // database later pas closen
     }
 
     private void Update_Table() {
