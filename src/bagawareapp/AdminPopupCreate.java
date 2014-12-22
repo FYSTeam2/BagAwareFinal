@@ -30,7 +30,7 @@ public class AdminPopupCreate extends javax.swing.JFrame {
         conn = JavaConnect.ConnecrDb();
         //add locations to the combobox via method
         FillTypeBox();
-        JavaConnect.closeDb();
+        
     }
 
     /**
@@ -239,6 +239,7 @@ public class AdminPopupCreate extends javax.swing.JFrame {
             pst.executeUpdate();
 
             //close create window and refresh table
+            //JavaConnect.closeDb(); //close DB connection    // gives an error
             this.dispose();
 
         } catch (Exception e) {
