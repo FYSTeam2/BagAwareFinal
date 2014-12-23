@@ -147,17 +147,24 @@ public class Grafiek extends javax.swing.JFrame {
     //statistics button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       String bagageLost = null;
-       try {
+      int bLost = 0;
+        try {
             //Connection openen gebeurt hier.
              conn = JavaConnect.ConnecrDb();
             
-            pst = (PreparedStatement) conn.createStatement();
-           rs = pst.executeQuery("SELECT COUNT(*) FROM lost");
+            pst = conn.prepareStatement("SELECT COUNT(*) FROM lost");
+            rs = pst.executeQuery();
             
-            bagageLost = rs.getString(1);
-   
+            
           
+        if(rs.next()){
+        bLost = rs.getInt(1);
+        
+        }
+         
+         
        } catch (Exception e) {
+           System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Table cannot be found");
         }
         
@@ -166,10 +173,10 @@ public class Grafiek extends javax.swing.JFrame {
         DefaultCategoryDataset bagStats = new DefaultCategoryDataset();
        
       // System.out.println(bagageLost);
-        int bLost = Integer.parseInt(bagageLost);
-
+        
+    //int bLost = Integer.parseInt(bagageLost);
        
-       bagStats.setValue(12, "Bagage Lost", "Bagage Lost");
+      bagStats.setValue(bLost, "Bagage Lost", "Bagage Lost");
        //bagStats.setValue(80, "Bagage Found", "Bagage Found");
        //bagStats.setValue(150, "Cases solved", "Cases Solved");
        
