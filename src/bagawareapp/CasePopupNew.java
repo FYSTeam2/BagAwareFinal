@@ -84,7 +84,6 @@ public class CasePopupNew extends javax.swing.JFrame {
         this.dispose();
         //open create new case window
         CasePopupNewBagage cCreate = new CasePopupNewBagage();
-        cCreate.setTitle("BagAware - New Case: Found bagage");
         cCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
@@ -103,7 +102,6 @@ public class CasePopupNew extends javax.swing.JFrame {
         this.dispose();
         //open create new case window
         CasePopupNewClient cCreate = new CasePopupNewClient();
-        cCreate.setTitle("BagAware - New Case: Client lost bagage");
         cCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it

@@ -133,11 +133,6 @@ public class AdminPopupCreate extends javax.swing.JFrame {
         );
 
         field_password.setText("*****");
-        field_password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                field_passwordActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Password");
 
@@ -258,10 +253,6 @@ public class AdminPopupCreate extends javax.swing.JFrame {
     private void button_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_button_cancelActionPerformed
-
-    private void field_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_field_passwordActionPerformed
     private void FillTypeBox() {
         try {
             String sqlLocation = "SELECT * FROM bagawaredb.TYPE";

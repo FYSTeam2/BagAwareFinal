@@ -319,7 +319,6 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
     private void button_newcaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_newcaseActionPerformed
         //Open the window to create a new case
         CasePopupNew cCreate = new CasePopupNew();
-        cCreate.setTitle("BagAware - New Case");
         cCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
