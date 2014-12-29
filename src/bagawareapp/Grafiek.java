@@ -146,7 +146,7 @@ public class Grafiek extends javax.swing.JFrame {
 
     //statistics button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      String bagageLost = null;
+      
       int bLost = 0;
         try {
             //Connection openen gebeurt hier.
