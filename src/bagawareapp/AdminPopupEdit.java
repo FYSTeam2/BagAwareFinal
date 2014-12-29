@@ -4,11 +4,20 @@
  */
 package bagawareapp;
 
+import static bagawareapp.AdminPopupCreate.now;
+import static bagawareapp.LogonScreen.locationOfLogin;
+import javax.swing.*;
+import java.sql.*;
+
 /**
  *
  * @author Team2FYS - IS106
  */
 public class AdminPopupEdit extends javax.swing.JFrame {
+    
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
 
     /**
      * Creates new form AdminPopupEdit
@@ -28,13 +37,13 @@ public class AdminPopupEdit extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        field_fname = new javax.swing.JTextField();
+        field_lname = new javax.swing.JTextField();
+        field_username = new javax.swing.JTextField();
+        field_password = new javax.swing.JTextField();
+        combobox_type = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Button_Confirm = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,24 +72,34 @@ public class AdminPopupEdit extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jTextField1.setText("First name");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        field_fname.setText("First name");
+        field_fname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                field_fnameActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("Last name");
+        field_lname.setText("Last name");
 
-        jTextField3.setText("Username");
+        field_username.setText("Username");
+        field_username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_usernameActionPerformed(evt);
+            }
+        });
 
-        jTextField4.setText("Password");
+        field_password.setText("Password");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combobox_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setText("Account type");
 
-        jButton1.setText("Confirm");
+        Button_Confirm.setText("Confirm");
+        Button_Confirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_ConfirmActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -98,23 +117,23 @@ public class AdminPopupEdit extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(field_password, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(field_username, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(field_lname, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Button_Confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(field_fname, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(combobox_type, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(29, 29, 29))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -124,18 +143,18 @@ public class AdminPopupEdit extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(field_fname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combobox_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(field_lname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(field_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(field_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(Button_Confirm)
                     .addComponent(jButton2))
                 .addGap(24, 24, 24))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,13 +166,52 @@ public class AdminPopupEdit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void field_fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_fnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_field_fnameActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void Button_ConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ConfirmActionPerformed
+        //at press save the data from the form into the database
+
+        try {
+            String sqlLocation = "INSERT INTO ACCOUNT (username, password,"
+                    + " fname, lname,"
+                    + " TYPE_typecode) VALUE"
+                    + " (?,?,?,?,?,?)";
+            pst = conn.prepareStatement(sqlLocation);
+
+            pst.setString(1, field_username.getText());
+            pst.setString(2, field_password.toString());
+            pst.setString(3, field_fname.getText());
+            pst.setString(4, field_lname.getText());
+            pst.setString(5, locationOfLogin);
+            pst.setString(6, (String) combobox_type.getSelectedItem());
+            pst.executeUpdate();
+
+            //close create window and refresh table
+            //JavaConnect.closeDb(); //closes DB connection   // gives an error
+            this.dispose();
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, e);
+
+
+    }            
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_Button_ConfirmActionPerformed
+
+    private void field_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_field_usernameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,15 +249,15 @@ public class AdminPopupEdit extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Button_Confirm;
+    private javax.swing.JComboBox combobox_type;
+    private javax.swing.JTextField field_fname;
+    private javax.swing.JTextField field_lname;
+    private javax.swing.JTextField field_password;
+    private javax.swing.JTextField field_username;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

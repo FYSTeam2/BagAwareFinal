@@ -450,6 +450,6 @@ public class AdminMainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logoutbutton;
     private javax.swing.JButton newuserbutton;
-    private javax.swing.JTable tableAccounts;
+    public javax.swing.JTable tableAccounts;
     // End of variables declaration//GEN-END:variables
 }
