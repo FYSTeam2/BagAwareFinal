@@ -5,6 +5,7 @@
 package bagawareapp;
 
 import static bagawareapp.AdminPopupCreate.now;
+import static bagawareapp.AdminMainScreen.usernameSelected;
 import static bagawareapp.LogonScreen.locationOfLogin;
 import javax.swing.*;
 import java.sql.*;
@@ -178,10 +179,10 @@ public class AdminPopupEdit extends javax.swing.JFrame {
         //at press save the data from the form into the database
 
         try {
-            String sqlLocation = "INSERT INTO ACCOUNT (username, password,"
+            String sqlLocation = "UPDATE ACCOUNT (username, password,"
                     + " fname, lname,"
                     + " TYPE_typecode) VALUE"
-                    + " (?,?,?,?,?,?)";
+                    + " (?,?,?,?,?,?) WHERE username = ?";
             pst = conn.prepareStatement(sqlLocation);
 
             pst.setString(1, field_username.getText());
@@ -190,6 +191,7 @@ public class AdminPopupEdit extends javax.swing.JFrame {
             pst.setString(4, field_lname.getText());
             pst.setString(5, locationOfLogin);
             pst.setString(6, (String) combobox_type.getSelectedItem());
+            pst.setString(7, AdminMainScreen.usernameSelected);
             pst.executeUpdate();
 
             //close create window and refresh table
