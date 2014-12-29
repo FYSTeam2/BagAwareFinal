@@ -19,6 +19,7 @@ public class CasePopupNewBagage extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    JavaConnect JavaConnect = new JavaConnect();
 
     /**
      * Creates new form CasePopupNewBagage
@@ -175,20 +176,10 @@ public class CasePopupNewBagage extends javax.swing.JFrame {
     }//GEN-LAST:event_button_cancelActionPerformed
 
     private void button_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_confirmActionPerformed
-       
-       
-        
+
         try {
-            
-             Luggage lug = new Luggage();
-        
-        //getInstance() geeft een object terug van BagAwareApp.
-        //een object kan non-static methodes uitvoeren zoals getQm()
-        //getQm geeft een object terug van de QueryManager klasse zodat je die niet
-        // opnieuw hoeft te schrijven.\
-        // En dat object heeft weer een methode genaamd addLuggage
-        BagAwareApp.getInstance().getQueryManager().addLuggage(lug);
-            
+            conn = JavaConnect.ConnecrDb();
+
             String sql = "INSERT INTO FOUND (baglabelcode, brand, color, weight,"
                     + " description, LOCATION_locationcode, status, datecreated)"
                     + " VALUE (?,?,?,?,?,?,?,?)";
