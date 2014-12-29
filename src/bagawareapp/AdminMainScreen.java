@@ -52,7 +52,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Table cannot be found");
         }
-        // Close connection
+        // Close connection MOET NOG ERBIJ ---
     }
 
     /**
@@ -83,7 +83,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
         jScrollBar1 = new javax.swing.JScrollBar();
         jPanel3 = new javax.swing.JPanel();
         newuserbutton = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        editUserButton = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
         jButton3.setText("jButton3");
@@ -227,10 +227,20 @@ public class AdminMainScreen extends javax.swing.JFrame {
         });
         jPanel3.add(newuserbutton);
 
-        jButton7.setText("Edit user");
-        jPanel3.add(jButton7);
+        editUserButton.setText("Edit user");
+        editUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserButtonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(editUserButton);
 
         jButton8.setText("Delete user");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton8);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -277,6 +287,10 @@ public class AdminMainScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action performed to log the user out
+     * @param evt 
+     */
     private void logoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbuttonActionPerformed
         //close current window
         this.dispose();
@@ -284,7 +298,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
         LogonScreen login = new LogonScreen();
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
-            // these lines force the login screen to the foreground and centere it
+            //these lines force the login screen to the foreground and center it
             public void run() {
                 login.toFront();
                 login.repaint();
@@ -294,6 +308,10 @@ public class AdminMainScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_logoutbuttonActionPerformed
 
+    /**
+     * Creates a new user when the "Create new user" button is pressed
+     * @param evt 
+     */
     private void newuserbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newuserbuttonActionPerformed
         //Open the window to create a new user
         AdminPopupCreate aCreate = new AdminPopupCreate();
@@ -329,6 +347,10 @@ public class AdminMainScreen extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Refreshes the table when the "Refresh" button is pressed
+     * @param evt 
+     */
     private void button_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_refreshActionPerformed
         //refreshes the screen and table contents
         AdminMainScreen AMain = new AdminMainScreen();
@@ -344,6 +366,33 @@ public class AdminMainScreen extends javax.swing.JFrame {
         });
         this.dispose();
     }//GEN-LAST:event_button_refreshActionPerformed
+
+    private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
+        //Open the window to edit a user
+        AdminPopupEdit aEdit = new AdminPopupEdit();
+        aEdit.setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            // these lines force the screen to the foreground and center it
+            public void run() {
+                aEdit.toFront();
+                aEdit.repaint();
+                aEdit.setLocationRelativeTo(null);
+            }
+        });
+    }//GEN-LAST:event_editUserButtonActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        final AdminPopupDelete aDelete = new AdminPopupDelete();
+        aDelete.setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            // these lines force the screen to the foreground and centere it
+            public void run() {
+                aDelete.toFront();
+                aDelete.repaint();
+                aDelete.setLocationRelativeTo(null);
+            }
+        });
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -382,11 +431,11 @@ public class AdminMainScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_refresh;
+    private javax.swing.JButton editUserButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

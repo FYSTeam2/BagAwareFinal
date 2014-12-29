@@ -21,7 +21,7 @@ public class AdminPopupDelete extends javax.swing.JFrame {
     /**
      * Creates new form AdminPopupDelete
      */
-    private AdminPopupDelete() {
+    public AdminPopupDelete() {
         initComponents();
     }
 

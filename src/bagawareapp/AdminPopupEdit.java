@@ -13,7 +13,7 @@ public class AdminPopupEdit extends javax.swing.JFrame {
     /**
      * Creates new form AdminPopupEdit
      */
-    private AdminPopupEdit() {
+    public AdminPopupEdit() {
         initComponents();
     }
 

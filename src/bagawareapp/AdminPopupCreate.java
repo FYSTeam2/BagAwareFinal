@@ -23,7 +23,7 @@ public class AdminPopupCreate extends javax.swing.JFrame {
     /**
      * Creates new form AdminPopupCreate
      */
-    AdminPopupCreate() {
+    public AdminPopupCreate() {
 
         initComponents();
         JavaConnect JavaConnect = new JavaConnect();
