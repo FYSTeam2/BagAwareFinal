@@ -241,7 +241,8 @@ public class AdminPopupCreate extends javax.swing.JFrame {
             //close create window and refresh table
             //JavaConnect.closeDb(); //closes DB connection   // gives an error
             this.dispose();
-
+            
+            
         } catch (Exception e) {
 
             JOptionPane.showMessageDialog(null, e);

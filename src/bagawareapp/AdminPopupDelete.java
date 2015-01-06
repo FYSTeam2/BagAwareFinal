@@ -130,18 +130,11 @@ public class AdminPopupDelete extends javax.swing.JFrame {
         //Pak de id van de geselecteerde employee
         //DELETE FROM bagawaredb.ACCOUNT WHERE id = wat jij hebt geslecteeerd
         try {
-            String sql1 = "SELECT username FROM bagawaredb.ACCOUNT";
-            pst = conn.prepareStatement(sql1);
-            rs = pst.executeQuery();
-            String add1 = null;
-            if (rs.next()) {
-
-                add1 = rs.getString("username");
-            }
-            String sql2 = "DELETE FROM bagawaredb.ACCOUNT WHERE username = ?";
             
-            pst = conn.prepareStatement(sql2);
-            pst.setString(1, add1);
+            String sql = "DELETE FROM bagawaredb.ACCOUNT WHERE username = ?";
+            
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, AdminMainScreen.usernameSelected);
             pst.executeQuery();
 
         } catch (Exception e) {

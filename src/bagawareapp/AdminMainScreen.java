@@ -15,6 +15,7 @@ import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
+
 public class AdminMainScreen extends javax.swing.JFrame {
 
     public static String usernameSelected = null;
@@ -210,6 +211,11 @@ public class AdminMainScreen extends javax.swing.JFrame {
                 "Username", "User type", "Created on"
             }
         ));
+        tableAccounts.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tableAccountsFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableAccounts);
         if (tableAccounts.getColumnModel().getColumnCount() > 0) {
             tableAccounts.getColumnModel().getColumn(0).setHeaderValue("Username");
@@ -317,6 +323,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
         AdminPopupCreate aCreate = new AdminPopupCreate();
         aCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
+        
             // these lines force the screen to the foreground and centere it
             public void run() {
                 aCreate.toFront();
@@ -393,6 +400,9 @@ public class AdminMainScreen extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void tableAccountsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableAccountsFocusGained
+    }//GEN-LAST:event_tableAccountsFocusGained
 
     /**
      * @param args the command line arguments
