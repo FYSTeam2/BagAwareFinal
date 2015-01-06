@@ -317,12 +317,13 @@ public class AdminMainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutbuttonActionPerformed
 
     /**
-     * Creates a new user when the "Create new user" button is pressed
+     * Opens a popup to create a new user when the "Create new user" button is pressed
      * @param evt 
      */
     private void newuserbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newuserbuttonActionPerformed
-        //Open the window to create a new user
         AdminPopupCreate aCreate = new AdminPopupCreate();
+        aCreate.setTitle("BagAware - Create A New User Account");   // set title
+        aCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // when (X) button is pressed, closes only the popup
         aCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
         
@@ -379,6 +380,8 @@ public class AdminMainScreen extends javax.swing.JFrame {
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
         //Open the window to edit a user
         AdminPopupEdit aEdit = new AdminPopupEdit();
+        aEdit.setTitle("BagAware - Edit A New User Account");   // set title
+        aEdit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // when (X) button is pressed, closes only the popup
         aEdit.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and center it
@@ -392,6 +395,8 @@ public class AdminMainScreen extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         final AdminPopupDelete aDelete = new AdminPopupDelete();
+        aDelete.setTitle("BagAware - Delete A User Account");   // set title
+        aDelete.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // when (X) button is pressed, closes only the popup
         aDelete.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it

@@ -331,7 +331,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_button_StatisticsActionPerformed
 
     private void button_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_searchActionPerformed
-        TableSearch();        // TODO add your handling code here:
+        TableSearch();
     }//GEN-LAST:event_button_searchActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -360,6 +360,8 @@ public class ManagerMainScreen extends javax.swing.JFrame {
     }
     private void button_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_deleteActionPerformed
         CasePopupDelete CDelete = new CasePopupDelete();
+        CDelete.setTitle("BagAware - Delete A User Account");   // set title
+        CDelete.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // when (X) button is pressed, closes only the popup
         CDelete.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it

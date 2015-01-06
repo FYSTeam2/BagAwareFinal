@@ -320,6 +320,8 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
     private void button_newcaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_newcaseActionPerformed
         //Open the window to create a new case
         CasePopupNew cCreate = new CasePopupNew();
+        cCreate.setTitle("BagAware - Create A New Case");   // set title
+        cCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // when (X) button is pressed, closes only the popup
         cCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
@@ -357,6 +359,8 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
 
     private void button_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_deleteActionPerformed
         CasePopupDelete cDelete = new CasePopupDelete();
+        cDelete.setTitle("BagAware - Delete A Case");   // set title
+        cDelete.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // when (X) button is pressed, closes only the popup
         cDelete.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
