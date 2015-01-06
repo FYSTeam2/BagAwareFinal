@@ -211,6 +211,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
                 "Username", "User type", "Created on"
             }
         ));
+        tableAccounts.setEnabled(false);
         tableAccounts.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tableAccountsFocusGained(evt);
@@ -302,6 +303,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
         this.dispose();
         //reopen the loginscreen
         LogonScreen login = new LogonScreen();
+        login.setTitle("BagAware - Login Screen");
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             //these lines force the login screen to the foreground and center it

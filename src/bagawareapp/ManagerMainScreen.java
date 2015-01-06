@@ -235,6 +235,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
                 "Case ID", "Status", "Created on"
             }
         ));
+        tableCases.setEnabled(false);
         jScrollPane1.setViewportView(tableCases);
 
         button_findmatch.setText("Find match");
@@ -304,6 +305,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         this.dispose();
         //reopen the loginscreen
         LogonScreen login = new LogonScreen();
+        login.setTitle("BagAware - Login Screen");
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the login screen to the foreground and centere it
@@ -432,10 +434,14 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_findmatchActionPerformed
 
+    /**
+     * This method is invoked when the "refresh" button is pressed:
+     * it refreshes the screen and table contents
+     * @param evt 
+     */
     private void button_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_refreshActionPerformed
-        //refreshes the screen and table contents
         ManagerMainScreen MMain = new ManagerMainScreen();
-        MMain.setTitle("Manager Main Screen");        // set title
+        MMain.setTitle("BagAware - Manager Main Screen");        // set title
         MMain.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
