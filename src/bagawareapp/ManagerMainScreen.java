@@ -25,7 +25,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
     public static ResultSet rsmatch = null;
     ResultSet rs = null;
     private JavaConnect jc;
-    
+
     /**
      * Creates new form ManagerPopupScreen
      */
@@ -34,10 +34,9 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         jc = new JavaConnect();
         Update_Table();
 
-
     }
 
-      private void Update_Table() {
+    private void Update_Table() {
         try {
             conn = jc.ConnecrDb();
             String sql = "SELECT baglabelcode 'Bagage Label', Status, "
@@ -318,8 +317,10 @@ public class ManagerMainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_button_logoutActionPerformed
 
     private void button_StatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_StatisticsActionPerformed
-    Grafiek cCreate = new Grafiek();    
-      cCreate.setVisible(true);
+        Grafiek cCreate = new Grafiek();
+        cCreate.setTitle("BagAware - Statistics");
+        cCreate.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        cCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
             public void run() {
@@ -437,9 +438,10 @@ public class ManagerMainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_button_findmatchActionPerformed
 
     /**
-     * This method is invoked when the "refresh" button is pressed:
-     * it refreshes the screen and table contents
-     * @param evt 
+     * This method is invoked when the "refresh" button is pressed: it refreshes
+     * the screen and table contents
+     *
+     * @param evt
      */
     private void button_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_refreshActionPerformed
         ManagerMainScreen MMain = new ManagerMainScreen();
