@@ -380,7 +380,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
         //Open the window to edit a user
         AdminPopupEdit aEdit = new AdminPopupEdit();
-        aEdit.setTitle("BagAware - Edit A User Account");   // set title
+        aEdit.setTitle("BagAware - Edit A New User Account");   // set title
         aEdit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // when (X) button is pressed, closes only the popup
         aEdit.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
