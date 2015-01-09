@@ -25,6 +25,9 @@ public class AdminPopupEdit extends javax.swing.JFrame {
      */
     public AdminPopupEdit() {
         initComponents();
+        JavaConnect JavaConnect = new JavaConnect();
+        conn = JavaConnect.ConnecrDb();
+        FillTypeBox();
     }
 
     /**
@@ -90,6 +93,11 @@ public class AdminPopupEdit extends javax.swing.JFrame {
         });
 
         combobox_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combobox_type.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combobox_typeActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Account type");
 
@@ -240,6 +248,27 @@ public class AdminPopupEdit extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_field_usernameActionPerformed
 
+    private void combobox_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_typeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combobox_typeActionPerformed
+    private void FillTypeBox() {
+        try {
+            String sqlLocation = "SELECT * FROM bagawaredb.TYPE";
+            pst = conn.prepareStatement(sqlLocation);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String type = rs.getString("typecode");
+                combobox_type.addItem(type);
+
+            }
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+    }
     /**
      * @param args the command line arguments
      */

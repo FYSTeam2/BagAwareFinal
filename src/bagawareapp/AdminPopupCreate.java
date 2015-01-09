@@ -90,6 +90,12 @@ public class AdminPopupCreate extends javax.swing.JFrame {
 
         jLabel2.setText("Birth date (YYYY/MM/DD)");
 
+        combobox_type.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combobox_typeActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("User type");
 
         button_confirm.setText("Confirm");
@@ -278,6 +284,10 @@ public class AdminPopupCreate extends javax.swing.JFrame {
     private void button_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_button_cancelActionPerformed
+
+    private void combobox_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_typeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combobox_typeActionPerformed
     private void FillTypeBox() {
         try {
             String sqlLocation = "SELECT * FROM bagawaredb.TYPE";

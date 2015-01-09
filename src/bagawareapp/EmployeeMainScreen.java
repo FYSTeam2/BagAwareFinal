@@ -380,7 +380,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
         try {
             conn = JavaConnect.ConnecrDb();
 
-            String sql1 = "SELECT baglabelcode  FROM bagawaredb.LOST";
+            String sql1 = "SELECT baglabelcode FROM bagawaredb.LOST";
             String sql2 = "SELECT baglabelcode FROM bagawaredb.FOUND";
 
             pst = conn.prepareStatement(sql1);
