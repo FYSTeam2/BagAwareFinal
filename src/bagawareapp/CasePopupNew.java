@@ -11,7 +11,7 @@ package bagawareapp;
 public class CasePopupNew extends javax.swing.JFrame {
 
     /**
-     * Creates new form CasePopupNew
+     * @description Creates new form CasePopupNew
      */
     CasePopupNew() {
         initComponents();
@@ -78,7 +78,10 @@ public class CasePopupNew extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * @description creates a new window to add a new found bag case
+     * @param evt
+     */
     private void button_foundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_foundActionPerformed
         //close choice menu
         this.dispose();
@@ -96,7 +99,10 @@ public class CasePopupNew extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_button_foundActionPerformed
-
+    /**
+     * @description opens a window to add a new lost bag case
+     * @param evt
+     */
     private void button_lostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_lostActionPerformed
         //close choice menu
         this.dispose();

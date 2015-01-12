@@ -16,13 +16,13 @@ import static bagawareapp.LogonScreen.locationOfLogin;
  */
 public class CasePopupNewBagage extends javax.swing.JFrame {
 
-    Connection conn = null;
-    ResultSet rs = null;
-    PreparedStatement pst = null;
-    JavaConnect JavaConnect = new JavaConnect();
+    private Connection conn = null;
+    private ResultSet rs = null;
+    private PreparedStatement pst = null;
+    private JavaConnect JavaConnect = new JavaConnect();
 
     /**
-     * Creates new form CasePopupNewBagage
+     * @description Creates new form CasePopupNewBagage
      */
     public CasePopupNewBagage() {
         initComponents();
@@ -169,12 +169,18 @@ public class CasePopupNewBagage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * @description cancels operation and closes window
+     * @param evt
+     */
     private void button_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cancelActionPerformed
         //close window
         this.dispose();
     }//GEN-LAST:event_button_cancelActionPerformed
-
+    /**
+     * @description reads text fields and adds the data to the database
+     * @param evt
+     */
     private void button_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_confirmActionPerformed
 
         try {
@@ -201,6 +207,7 @@ public class CasePopupNewBagage extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+
     }//GEN-LAST:event_button_confirmActionPerformed
 
     /**

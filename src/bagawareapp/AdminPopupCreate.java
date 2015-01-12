@@ -14,14 +14,18 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.*;
 
+/**
+ *
+ * @author Jens
+ */
 public class AdminPopupCreate extends javax.swing.JFrame {
-    
-    Connection conn = null;
-    ResultSet rs = null;
-    PreparedStatement pst = null;
+
+    private Connection conn = null;
+    private ResultSet rs = null;
+    private PreparedStatement pst = null;
 
     /**
-     * Creates new form AdminPopupCreate
+     * @description Creates new form AdminPopupCreate
      */
     public AdminPopupCreate() {
 
@@ -30,7 +34,7 @@ public class AdminPopupCreate extends javax.swing.JFrame {
         conn = JavaConnect.ConnecrDb();
         //add locations to the combobox via method
         FillTypeBox();
-        
+
     }
 
     /**
@@ -247,7 +251,10 @@ public class AdminPopupCreate extends javax.swing.JFrame {
     private void field_birthdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_birthdateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_field_birthdateActionPerformed
-
+    /**
+     * @description Button adds the data to the database
+     * @param evt
+     */
     private void button_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_confirmActionPerformed
         //at press save the data from the form into the database
 
@@ -271,8 +278,7 @@ public class AdminPopupCreate extends javax.swing.JFrame {
             //close create window and refresh table
             //JavaConnect.closeDb(); //closes DB connection   // gives an error
             this.dispose();
-            
-            
+
         } catch (Exception e) {
 
             JOptionPane.showMessageDialog(null, e);
@@ -288,6 +294,9 @@ public class AdminPopupCreate extends javax.swing.JFrame {
     private void combobox_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_typeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combobox_typeActionPerformed
+    /**
+     * @description Method to fill the type box with data
+     */
     private void FillTypeBox() {
         try {
             String sqlLocation = "SELECT * FROM bagawaredb.TYPE";
@@ -343,6 +352,10 @@ public class AdminPopupCreate extends javax.swing.JFrame {
     }
     private static final String DATE_FORMAT_NOW = "yyyy-MM-dd";
 
+    /**
+     * @description method to call the date
+     * @return
+     */
     public static String now() {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);

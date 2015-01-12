@@ -15,30 +15,39 @@ import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
-
+/**
+ *
+ * @author Jens
+ */
 public class AdminMainScreen extends javax.swing.JFrame {
 
+    /**
+     * @description makes the variables
+     */
     public static String usernameSelected = null;
     //variables below server for db connection and querries
-    //moet private
-    Connection conn = null;
-    ResultSet rs = null;
-    PreparedStatement pst = null;
-    JavaConnect JavaConnect = new JavaConnect();
+    private Connection conn = null;
+    private ResultSet rs = null;
+    private PreparedStatement pst = null;
+    private JavaConnect JavaConnect = new JavaConnect();
 
     /**
-     * Creates new form AdminMainScreen
+     * @description Creates new form AdminMainScreen
      */
     AdminMainScreen() {
+        /**
+         * @description Updates and fills the table
+         */
         initComponents();
-        //Dit hieronder moet weg.
-        JavaConnect JavaConnect = new JavaConnect();
         conn = JavaConnect.ConnecrDb();
         updateTable();
         JavaConnect.closeDb();
-        
+
     }
 
+    /**
+     * @description method to fill the table with account data
+     */
     private void updateTable() {
         try {
             //Connection openen gebeurt hier.
@@ -49,11 +58,11 @@ public class AdminMainScreen extends javax.swing.JFrame {
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             tableAccounts.setModel(DbUtils.resultSetToTableModel(rs));
-             JavaConnect.closeDb();
+            JavaConnect.closeDb();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Table cannot be found");
         }
-        // Close connection MOET NOG ERBIJ ---
+
     }
 
     /**
@@ -85,7 +94,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         newuserbutton = new javax.swing.JButton();
         editUserButton = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        Button_Delete = new javax.swing.JButton();
 
         jButton3.setText("jButton3");
 
@@ -242,13 +251,13 @@ public class AdminMainScreen extends javax.swing.JFrame {
         });
         jPanel3.add(editUserButton);
 
-        jButton8.setText("Delete user");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        Button_Delete.setText("Delete user");
+        Button_Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                Button_DeleteActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton8);
+        jPanel3.add(Button_Delete);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -295,8 +304,8 @@ public class AdminMainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Action performed to log the user out
-     * @param evt 
+     * @description Action performed to log the user out
+     * @param evt
      */
     private void logoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbuttonActionPerformed
         //close current window
@@ -317,16 +326,18 @@ public class AdminMainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutbuttonActionPerformed
 
     /**
-     * Opens a popup to create a new user when the "Create new user" button is pressed
-     * @param evt 
+     * @description Opens a popup to create a new user when the "Create new
+     * user" button is pressed
+     * @param evt
      */
     private void newuserbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newuserbuttonActionPerformed
         AdminPopupCreate aCreate = new AdminPopupCreate();
         aCreate.setTitle("BagAware - Create A New User Account");   // set title
-        aCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // when (X) button is pressed, closes only the popup
+        aCreate.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // when (X) button is pressed, closes only the popup
         aCreate.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
-        
+
             // these lines force the screen to the foreground and centere it
             public void run() {
                 aCreate.toFront();
@@ -335,13 +346,19 @@ public class AdminMainScreen extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_newuserbuttonActionPerformed
+
+    /**
+     * @description selects the entry in table when it is mouse clicked
+     * @param evt
+     */
     public void Table_CasesMouseClicked(java.awt.event.MouseEvent evt) {
 
         try {
             conn = JavaConnect.ConnecrDb();
             int row = tableAccounts.getSelectedRow();
-            String tableClick = (String) (tableAccounts.getModel().getValueAt(row, 0));
-            String sql = "SELECT * FROM bagawaredb.Accounts where username=?"; 
+            String tableClick = (String) (tableAccounts.getModel()
+                    .getValueAt(row, 0));
+            String sql = "SELECT * FROM bagawaredb.Accounts where username=?";
             pst = conn.prepareStatement(sql);
             pst.setString(1, tableClick);
             rs = pst.executeQuery();
@@ -358,8 +375,8 @@ public class AdminMainScreen extends javax.swing.JFrame {
     }
 
     /**
-     * Refreshes the table when the "Refresh" button is pressed
-     * @param evt 
+     * @description Refreshes the table when the "Refresh" button is pressed
+     * @param evt
      */
     private void button_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_refreshActionPerformed
         //refreshes the screen and table contents
@@ -377,11 +394,27 @@ public class AdminMainScreen extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_button_refreshActionPerformed
 
+    /**
+     * @description Makes the table non-editable but only selectable
+     * @param evt
+     */
+    private void tableAccountsMouseReleased(java.awt.event.MouseEvent evt) {
+        if (tableAccounts.isEditing()) {
+            tableAccounts.getCellEditor().stopCellEditing();
+        }
+        tableAccounts.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+    }
+
+    /**
+     * @description gives the edit button the function
+     * @param evt
+     */
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
         //Open the window to edit a user
         AdminPopupEdit aEdit = new AdminPopupEdit();
         aEdit.setTitle("BagAware - Edit A New User Account");   // set title
-        aEdit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // when (X) button is pressed, closes only the popup
+        aEdit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // when (X) button is pressed, closes only the popup
         aEdit.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and center it
@@ -392,11 +425,15 @@ public class AdminMainScreen extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_editUserButtonActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    /**
+     * @description gives the delete button a function
+     * @param evt
+     */
+    private void Button_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_DeleteActionPerformed
         final AdminPopupDelete aDelete = new AdminPopupDelete();
         aDelete.setTitle("BagAware - Delete A User Account");   // set title
-        aDelete.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // when (X) button is pressed, closes only the popup
+        aDelete.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // when (X) button is pressed, closes only the popup
         aDelete.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
             // these lines force the screen to the foreground and centere it
@@ -406,7 +443,7 @@ public class AdminMainScreen extends javax.swing.JFrame {
                 aDelete.setLocationRelativeTo(null);
             }
         });
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_Button_DeleteActionPerformed
 
     private void tableAccountsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableAccountsFocusGained
     }//GEN-LAST:event_tableAccountsFocusGained
@@ -447,13 +484,13 @@ public class AdminMainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_Delete;
     private javax.swing.JButton button_refresh;
     private javax.swing.JButton editUserButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

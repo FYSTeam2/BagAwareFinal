@@ -12,21 +12,30 @@ import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.*;
 
+/**
+ *
+ * @author Jens
+ */
 public class LogonScreen extends javax.swing.JFrame {
 //Prepare variables for future use (or in later screens)
 
+    /**
+     * @description variable declaration
+     */
     public static String locationOfLogin = null;
     public static String usernameOfLogin = null;
     public static String typeOfLogin = null;
-    Connection conn = null;
-    ResultSet rs = null;
-    PreparedStatement pst = null;
-    JavaConnect JavaConnect = new JavaConnect();
-    
+    private Connection conn = null;
+    private ResultSet rs = null;
+    private PreparedStatement pst = null;
+    private JavaConnect JavaConnect = new JavaConnect();
+
     LogonScreen() {
-        initComponents();        
+        initComponents();
         conn = JavaConnect.ConnecrDb();
-        //add locations to the combobox via method
+        /**
+         * @description add locations to the combobox via method
+         */
         FillLocationBox();
         JavaConnect.closeDb();
     }
@@ -229,38 +238,50 @@ public class LogonScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * @description calls forth the login method
+     * @param evt
+     */
     private void cmd_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_loginActionPerformed
 
-        // To use the cmd_loginActionPerformed() method on multiple places in 
-        // the code, we are referencing to the loginMethod() method
         loginMethod();
-//*/
     }//GEN-LAST:event_cmd_loginActionPerformed
-
+    /**
+     * @description closes the application
+     * @param evt
+     */
     private void exitbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitbuttonActionPerformed
-        //close if cancel is pressed
         System.exit(0);
 
     }//GEN-LAST:event_exitbuttonActionPerformed
 
-    // Log in when "enter" button is pressed
+    /**
+     * @description makes it so that if enter is pressed the login method is
+     * called as an alternative to pressing the button
+     * @param evt
+     */
     private void txt_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             loginMethod();
         }
     }//GEN-LAST:event_txt_passwordKeyPressed
-
+    /**
+     * @description makes it so that if enter is pressed the login method is
+     * called as an alternative to pressing the button
+     * @param evt
+     */
     private void combobox_locationKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_combobox_locationKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             loginMethod();
         }
     }//GEN-LAST:event_combobox_locationKeyPressed
-    //method to add locations into the combobox on the login screen
 
+    /**
+     * @description fills the location box with locations from the database
+     */
     private void FillLocationBox() {
         try {
-            
+
             conn = JavaConnect.ConnecrDb();
             String sqlLocation = "SELECT * FROM bagawaredb.LOCATION";
             pst = conn.prepareStatement(sqlLocation);
@@ -271,8 +292,8 @@ public class LogonScreen extends javax.swing.JFrame {
                 combobox_location.addItem(location);
 
             }
-        JavaConnect.closeDb();
-            
+            JavaConnect.closeDb();
+
         } catch (Exception e) {
 
             JOptionPane.showMessageDialog(null, "Connection to database failed,"
@@ -317,11 +338,13 @@ public class LogonScreen extends javax.swing.JFrame {
         });
     }
 
-    //---------------------------------------
-    // The method that logs in the user, this method is used by the "login"
-    // button in the login screen and the <enter> key also triggers this method
+    /**
+     * @description Method logs the user in to the app, it also checks the type
+     * of user trying to log on and opens the right main screen depending on the
+     * type
+     */
     private void loginMethod() {
-        
+
         conn = JavaConnect.ConnecrDb();
         // login button logic is here
         String sqllogin = "select * from bagawaredb.ACCOUNT where username=?"
@@ -427,7 +450,7 @@ public class LogonScreen extends javax.swing.JFrame {
                     + " failed");
         }
         //----------------------------------------
-        
+
         JavaConnect.closeDb();
     }
 

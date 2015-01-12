@@ -10,32 +10,42 @@ package bagawareapp;
  */
 import static bagawareapp.LogonScreen.locationOfLogin;
 import static bagawareapp.LogonScreen.usernameOfLogin;
-import bagawareapp.AdminMainScreen;
 import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
+/**
+ *
+ * @author Jens
+ */
 public class EmployeeMainScreen extends javax.swing.JFrame {
 
-    public static String labelCodeSelected = null;
-    Connection conn = null;
-    ResultSet rs1 = null;
-    ResultSet rs2 = null;
-    PreparedStatement pst = null;
-    public static ResultSet rsmatch = null;
-    ResultSet rs = null;
-    JavaConnect JavaConnect = new JavaConnect();
     /**
-     * Creates new form ManagerPopupScreen
+     * declaration of variables, also makes a stringbuilder to be used later
+     */
+    public static StringBuilder labelCodeSelected = new StringBuilder();
+    private Connection conn = null;
+    private ResultSet rs1 = null;
+    private ResultSet rs2 = null;
+    private PreparedStatement pst = null;
+    public static ResultSet rsmatch = null;
+    private ResultSet rs = null;
+    private JavaConnect JavaConnect = new JavaConnect();
+
+    /**
+     * @description Creates new form ManagerPopupScreen
      */
     EmployeeMainScreen() {
         initComponents();
         conn = JavaConnect.ConnecrDb();
-        Update_Table();
-        // JavaConnect.closeDb();   // database later pas closen
+        Update_Table_Bag();
+        Update_Table_Client();
     }
 
-    private void Update_Table() {
+    /**
+     * @description method to fill the BAG table with data
+     */
+    private void Update_Table_Bag() {
         try {
             conn = JavaConnect.ConnecrDb();
             String sql = "SELECT baglabelcode AS 'Bagage Label', Status, "
@@ -43,13 +53,35 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
                     + "FROM bagawaredb.FOUND";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
-            tableCases.setModel(DbUtils.resultSetToTableModel(rs));
+            tableCasesBag.setModel(DbUtils.resultSetToTableModel(rs));
             JavaConnect.closeDb();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
 
+    /**
+     * @description Method to fill the CLIENT table with data
+     */
+    private void Update_Table_Client() {
+        try {
+            conn = JavaConnect.ConnecrDb();
+            String sql = "SELECT baglabelcode AS 'Bagage Label', Status, "
+                    + "Datecreated AS 'Created On'"
+                    + "FROM bagawaredb.LOST";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            tableCasesClient.setModel(DbUtils.resultSetToTableModel(rs));
+            JavaConnect.closeDb();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    /**
+     * @description Method that checks the text in the search box and makes the
+     * results appear in the table
+     */
     private void TableSearch() {
         try {
             conn = JavaConnect.ConnecrDb();
@@ -61,7 +93,8 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
             pst.setString(3, txt_search.getText());
             pst.setString(4, txt_search.getText());
             rs = pst.executeQuery();
-            tableCases.setModel(DbUtils.resultSetToTableModel(rs));
+            tableCasesClient.setModel(DbUtils.resultSetToTableModel(rs));
+            tableCasesBag.setModel(DbUtils.resultSetToTableModel(rs));
             JavaConnect.closeDb();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -77,7 +110,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        headerPanel = new javax.swing.JPanel();
         button_logout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -89,19 +122,18 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
         button_search = new javax.swing.JButton();
         button_newcase = new javax.swing.JButton();
         txt_search = new javax.swing.JTextField();
-        button_delete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableCases = new javax.swing.JTable();
-        jScrollBar1 = new javax.swing.JScrollBar();
-        button_findmatch = new javax.swing.JButton();
-        button_newcase1 = new javax.swing.JButton();
+        tableCasesClient = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableCasesBag = new javax.swing.JTable();
+        button_delete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(159, 13, 10));
-        jPanel1.setForeground(new java.awt.Color(159, 13, 10));
-        jPanel1.setToolTipText("");
-        jPanel1.setPreferredSize(new java.awt.Dimension(653, 140));
+        headerPanel.setBackground(new java.awt.Color(159, 13, 10));
+        headerPanel.setForeground(new java.awt.Color(159, 13, 10));
+        headerPanel.setToolTipText("");
+        headerPanel.setPreferredSize(new java.awt.Dimension(653, 140));
 
         button_logout.setText("Logout");
         button_logout.addActionListener(new java.awt.event.ActionListener() {
@@ -140,58 +172,63 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
+        headerPanel.setLayout(headerPanelLayout);
+        headerPanelLayout.setHorizontalGroup(
+            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button_refresh)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button_logout))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(headerPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(238, 238, 238)
+                        .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(headerPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
+                            .addGroup(headerPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(headerPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(button_refresh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button_logout)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        headerPanelLayout.setVerticalGroup(
+            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(headerPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(headerPanelLayout.createSequentialGroup()
+                        .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(button_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(button_refresh))
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(45, 45, 45))
+                        .addGap(18, 18, 18)
+                        .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(headerPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addGap(53, 53, 53))
+                            .addGroup(headerPanelLayout.createSequentialGroup()
+                                .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(headerPanelLayout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(31, Short.MAX_VALUE))))))
         );
 
         button_search.setText("Search");
@@ -208,14 +245,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
             }
         });
 
-        button_delete.setText("Delete case");
-        button_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_deleteActionPerformed(evt);
-            }
-        });
-
-        tableCases.setModel(new javax.swing.table.DefaultTableModel(
+        tableCasesClient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -223,28 +253,38 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Case ID", "Status", "Created on"
+                "Case ID (Client)", "Status", "Created on"
             }
         ));
-        tableCases.setEnabled(false);
-        tableCases.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableCasesClient.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableCasesMouseClicked(evt);
+                tableCasesClientMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tableCases);
+        jScrollPane1.setViewportView(tableCasesClient);
 
-        button_findmatch.setText("Find matches");
-        button_findmatch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_findmatchActionPerformed(evt);
+        tableCasesBag.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Case ID (Bag)", "Status", "Created on"
+            }
+        ));
+        tableCasesBag.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableCasesBagMouseClicked(evt);
             }
         });
+        jScrollPane2.setViewportView(tableCasesBag);
 
-        button_newcase1.setText("Edit case");
-        button_newcase1.addActionListener(new java.awt.event.ActionListener() {
+        button_delete.setText("Delete case");
+        button_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_newcase1ActionPerformed(evt);
+                button_deleteActionPerformed(evt);
             }
         });
 
@@ -252,54 +292,47 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(button_newcase, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(button_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button_newcase1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(button_findmatch, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(360, 360, 360)
                         .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button_search, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(button_search, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button_search)
                     .addComponent(button_newcase)
-                    .addComponent(button_delete)
-                    .addComponent(button_findmatch)
-                    .addComponent(button_newcase1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(button_delete))
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 /**
- * Log out and open login screen
- * @param evt 
- */
+     * @description Log out and open login screen
+     *
+     * @param evt
+     */
     private void button_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_logoutActionPerformed
         //close current window
         this.dispose();
@@ -316,7 +349,11 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_button_logoutActionPerformed
-
+    /**
+     * @description opens a new window where the user can pick the type of case
+     * to be made
+     * @param evt
+     */
     private void button_newcaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_newcaseActionPerformed
         //Open the window to create a new case
         CasePopupNew cCreate = new CasePopupNew();
@@ -332,13 +369,18 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_button_newcaseActionPerformed
-
-    private void tableCasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCasesMouseClicked
+    /**
+     * @description selects the entry in the client table, cancels selection in
+     * the bag table
+     * @param evt
+     */
+    private void tableCasesClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCasesClientMouseClicked
 
         try {
+            tableCasesBag.getSelectionModel().clearSelection();
             conn = JavaConnect.ConnecrDb();
-            int row = tableCases.getSelectedRow();
-            String tableClick = (String) (tableCases.getModel().getValueAt(row, 0));
+            int row = tableCasesClient.getSelectedRow();
+            String tableClick = (String) (tableCasesClient.getModel().getValueAt(row, 0));
             String sql = "SELECT * FROM bagawaredb.FOUND WHERE baglabelcode='"
                     + tableClick + "' ";
             pst = conn.prepareStatement(sql);
@@ -347,7 +389,8 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
             if (rs.next()) {
 
                 String add1 = rs.getString("baglabelcode");
-                labelCodeSelected = add1;
+                labelCodeSelected = null;
+                labelCodeSelected.append(add1);
             }
             JavaConnect.closeDb();
         } catch (Exception e) {
@@ -355,8 +398,11 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
 
         }
-    }//GEN-LAST:event_tableCasesMouseClicked
-
+    }//GEN-LAST:event_tableCasesClientMouseClicked
+    /**
+     * @description opens the delete window
+     * @param evt
+     */
     private void button_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_deleteActionPerformed
         CasePopupDelete cDelete = new CasePopupDelete();
         cDelete.setTitle("BagAware - Delete A Case");   // set title
@@ -369,14 +415,97 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
                 cDelete.repaint();
                 cDelete.setLocationRelativeTo(null);
             }
-        });// TODO add your handling code here:
+        });
     }//GEN-LAST:event_button_deleteActionPerformed
-
+    /**
+     * @description calls the tablesearch() method when button is pressed
+     * @param evt
+     */
     private void button_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_searchActionPerformed
         TableSearch();
     }//GEN-LAST:event_button_searchActionPerformed
 
-    private void button_findmatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_findmatchActionPerformed
+    /**
+     * @description Makes the table non-editable, only selectable
+     * @param evt
+     */
+    private void headerPanelMouseReleased(java.awt.event.MouseEvent evt) {
+        if (tableCasesBag.isEditing()) {
+            tableCasesBag.getCellEditor().stopCellEditing();
+        }
+        tableCasesBag.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+
+        if (tableCasesClient.isEditing()) {
+            tableCasesClient.getCellEditor().stopCellEditing();
+        }
+        tableCasesClient.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+    }
+
+    /**
+     * @description refreshes the tables and fills them with new data
+     * @param evt
+     */
+    private void button_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_refreshActionPerformed
+        //refreshes the screen and table contents
+        EmployeeMainScreen EMain = new EmployeeMainScreen();
+        EMain.setTitle("Employee Main Screen");        // set title
+        EMain.setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            // these lines force the screen to the foreground and centere it
+            public void run() {
+                EMain.toFront();
+                EMain.repaint();
+                EMain.setLocationRelativeTo(null);
+            }
+        });
+        this.dispose();
+    }//GEN-LAST:event_button_refreshActionPerformed
+
+    /**
+     * @description selects entry in bag table if clicked and unselects selected
+     * entry in client table
+     * @param evt
+     */
+    private void tableCasesBagMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCasesBagMouseClicked
+
+        try {
+
+            tableCasesClient.getSelectionModel().clearSelection();
+            conn = JavaConnect.ConnecrDb();
+            int row = tableCasesBag.getSelectedRow();
+            String tableClick = (String) (tableCasesBag.getModel().getValueAt(row, 0));
+            String sql = "SELECT * FROM bagawaredb.LOST WHERE baglabelcode='"
+                    + tableClick + "' ";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                String add1 = rs.getString("baglabelcode");
+                labelCodeSelected = null;
+                labelCodeSelected.append(add1);
+            }
+            JavaConnect.closeDb();
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+    }//GEN-LAST:event_tableCasesBagMouseClicked
+    /**
+     * @description Makes the app look for matches every time a window is closed
+     * and focus on this window is gained
+     * @param evt
+     */
+    private void formFocusGained(java.awt.event.FocusEvent evt) {
+        findMatches();
+    }
+
+    /**
+     * Method looks in the database for matching entries in the LOST and FOUND
+     * tables and shows results in table
+     */
+    public void findMatches() {
         try {
             conn = JavaConnect.ConnecrDb();
 
@@ -396,7 +525,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
                 pst = conn.prepareStatement(sql1);
                 pst.setString(1, sql1);
                 rsmatch = pst.executeQuery();
-                tableCases.setModel(DbUtils.resultSetToTableModel(rs));
+                tableCasesClient.setModel(DbUtils.resultSetToTableModel(rs));
             } else {
 
                 sql1 = "SELECT brand, color FROM bagawaredb.LOST";
@@ -413,7 +542,7 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
                     pst = conn.prepareStatement(sql1);
                     pst.setString(1, sql1);
                     rsmatch = pst.executeQuery();
-                    tableCases.setModel(DbUtils.resultSetToTableModel(rs));
+                    tableCasesClient.setModel(DbUtils.resultSetToTableModel(rs));
                 } else {
 
                     sql1 = "SELECT weight FROM bagawaredb.LOST";
@@ -430,39 +559,19 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
                         pst = conn.prepareStatement(sql1);
                         pst.setString(1, sql1);
                         rsmatch = pst.executeQuery();
-                        tableCases.setModel(DbUtils.resultSetToTableModel(rs));
+                        tableCasesClient.setModel(DbUtils.resultSetToTableModel(rs));
+                        tableCasesBag.setModel(DbUtils.resultSetToTableModel(rs));
                     } else {
                         JOptionPane.showMessageDialog(null, "No matches found");
                     }
                 }
             }
-            
+
             JavaConnect.closeDb();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-
-    }//GEN-LAST:event_button_findmatchActionPerformed
-
-    private void button_newcase1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_newcase1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button_newcase1ActionPerformed
-
-    private void button_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_refreshActionPerformed
-        //refreshes the screen and table contents
-        EmployeeMainScreen EMain = new EmployeeMainScreen();
-        EMain.setTitle("Employee Main Screen");        // set title
-        EMain.setVisible(true);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            // these lines force the screen to the foreground and centere it
-            public void run() {
-                EMain.toFront();
-                EMain.repaint();
-                EMain.setLocationRelativeTo(null);
-            }
-        });
-        this.dispose();
-    }//GEN-LAST:event_button_refreshActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -502,22 +611,21 @@ public class EmployeeMainScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_delete;
-    private javax.swing.JButton button_findmatch;
     private javax.swing.JButton button_logout;
     private javax.swing.JButton button_newcase;
-    private javax.swing.JButton button_newcase1;
     private javax.swing.JButton button_refresh;
     private javax.swing.JButton button_search;
+    private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableCases;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tableCasesBag;
+    private javax.swing.JTable tableCasesClient;
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
 }

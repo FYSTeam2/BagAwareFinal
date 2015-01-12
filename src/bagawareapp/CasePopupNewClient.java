@@ -16,13 +16,13 @@ import javax.swing.*;
  */
 public class CasePopupNewClient extends javax.swing.JFrame {
 
-    Connection conn = null;
-    ResultSet rs = null;
-    PreparedStatement pst = null;
-    JavaConnect JavaConnect = new JavaConnect();
+    private Connection conn = null;
+    private ResultSet rs = null;
+    private PreparedStatement pst = null;
+    private JavaConnect JavaConnect = new JavaConnect();
 
     /**
-     * Creates new form CasePopupNewClient
+     * @description Creates new form CasePopupNewClient
      */
     CasePopupNewClient() {
         initComponents();
@@ -240,7 +240,10 @@ public class CasePopupNewClient extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * @description reads text fields and adds the data to the database
+     * @param evt
+     */
     private void button_confirmandprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_confirmandprintActionPerformed
         //Adds info into bagawaredb.FOUND
         try {
@@ -260,7 +263,7 @@ public class CasePopupNewClient extends javax.swing.JFrame {
             pst.setString(6, locationOfLogin);
             pst.setString(8, "Open");
             pst.execute();
-            
+
             JavaConnect.closeDb();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -279,8 +282,6 @@ public class CasePopupNewClient extends javax.swing.JFrame {
             pst.setString(3, field_lname.getText());
             pst.setString(4, field_tel.getText());
             pst.setString(5, field_email.getText());
-            //ID scan needs to be fixed
-            /*pst.setString(6, null);*/
             pst.setString(6, field_labelcode.getText());
             pst.setString(7, field_brand.getText());
             pst.setString(8, field_color.getText());
@@ -294,7 +295,7 @@ public class CasePopupNewClient extends javax.swing.JFrame {
 
             //close create window and refresh table
             this.dispose();
-            
+
             JavaConnect.closeDb();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -304,7 +305,10 @@ public class CasePopupNewClient extends javax.swing.JFrame {
         // logic for printing pdf goes here
         // logic for printing pdf goes here
     }//GEN-LAST:event_button_confirmandprintActionPerformed
-
+    /**
+     * @description cancels operation and closes window
+     * @param evt
+     */
     private void button_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cancelActionPerformed
         //close window
         this.dispose();

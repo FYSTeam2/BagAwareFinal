@@ -5,7 +5,6 @@
  */
 package bagawareapp;
 
-
 /**
  *
  * @author Team2FYS - IS106
@@ -13,21 +12,20 @@ package bagawareapp;
 public class BagAwareApp extends javax.swing.JFrame {
 
     private JavaConnect jc = new JavaConnect();
-    private QueryManager qm = new QueryManager(jc);
-    
+
     /**
-     * Creates new form form
+     * @description Creates new form form
      */
     private BagAwareApp() {
         initComponents();
     }
-    
-    public static BagAwareApp getInstance() { 
+
+    /**
+     * @description creates an instance of the application
+     * @return
+     */
+    public static BagAwareApp getInstance() {
         return new BagAwareApp();
-    }
-    
-    public QueryManager getQueryManager() {
-        return qm;
     }
 
     /**
@@ -37,14 +35,14 @@ public class BagAwareApp extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     /**
-     * opens the loginscreen from bagawareapp.LogonScreen.java  
-     */                       
+     * @description opens the login screen from bagawareapp.LogonScreen.java
+     */
     private void initComponents() {
         LogonScreen login = new LogonScreen();
         login.setTitle("BagAware - Login Screen");          // set title
         login.setVisible(true);
         java.awt.EventQueue.invokeLater(new Runnable() {
-            // these lines force the login screen to the foreground and centere it
+            // these lines force the login screen to the foreground and center it
             public void run() {
                 login.toFront();
                 login.repaint();
@@ -53,8 +51,8 @@ public class BagAwareApp extends javax.swing.JFrame {
         });
 
         /**
-         * This codeblock makes a red box appear in the background while the app
-         * is running
+         * This code block makes a red box appear in the background while the
+         * app is running
          */
         // <editor-fold defaultstate="collapsed" desc="Generated Code">
         frame = new javax.swing.JPanel();
@@ -127,7 +125,11 @@ public class BagAwareApp extends javax.swing.JFrame {
         }
         //</editor-fold>
         /* Create and display the form */
-
+        /**
+         * @description code to make the app open with a timer for the
+         * splashscreen the splashscreen itself is called from the VM options
+         * using: -splash:src/bagawareapp/logo.png
+         */
         //Timer voor het splashscherm duurt 100ms
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

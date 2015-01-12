@@ -12,14 +12,18 @@ import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
+/**
+ *
+ * @author Jens
+ */
 public class CasePopupDelete extends javax.swing.JFrame {
 
-    Connection conn = null;
-    ResultSet rs = null;
-    PreparedStatement pst = null;
+    private Connection conn = null;
+    private ResultSet rs = null;
+    private PreparedStatement pst = null;
 
     /**
-     * Creates new form CasePopupDelete
+     * @description Creates new form CasePopupDelete
      */
     CasePopupDelete() {
         initComponents();
@@ -39,7 +43,7 @@ public class CasePopupDelete extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         button_deleteconfirm = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Button_Delete = new javax.swing.JButton();
         txt_casetodelete = new javax.swing.JTextField();
 
         jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,15 +75,20 @@ public class CasePopupDelete extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Button_Delete.setText("Cancel");
+        Button_Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Button_DeleteActionPerformed(evt);
             }
         });
 
-        txt_casetodelete.setText(EmployeeMainScreen.labelCodeSelected);
+        txt_casetodelete.setText(EmployeeMainScreen.labelCodeSelected.toString());
         txt_casetodelete.setFocusable(false);
+        txt_casetodelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_casetodeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,7 +111,7 @@ public class CasePopupDelete extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Button_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txt_casetodelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
@@ -120,17 +129,24 @@ public class CasePopupDelete extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_deleteconfirm)
-                    .addComponent(jButton2))
+                    .addComponent(Button_Delete))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    /**
+     * @description closes the window and cancels the delete
+     * @param evt
+     */
+    private void Button_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_DeleteActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    }//GEN-LAST:event_Button_DeleteActionPerformed
+    /**
+     * @description confirms the deletion
+     * @param evt
+     */
     private void button_deleteconfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_deleteconfirmActionPerformed
         this.dispose();
         try {
@@ -151,6 +167,10 @@ public class CasePopupDelete extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_button_deleteconfirmActionPerformed
+
+    private void txt_casetodeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_casetodeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_casetodeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,8 +208,8 @@ public class CasePopupDelete extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_Delete;
     private javax.swing.JButton button_deleteconfirm;
-    private javax.swing.JButton jButton2;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
